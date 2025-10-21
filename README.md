@@ -552,7 +552,7 @@
         </div>
 
         <footer>
-            <p>&copy; 2024 Mesud Seid. All rights reserved.</p>
+            <p>&copy; 2025 Mesud Seid. All rights reserved.</p>
             <p>Proudly Ethiopian <span class="ethiopia-flag">🇪🇹</span> | Content Creator & Programmer</p>
             <p>Watch my videos and follow my programming journey! 🚀</p>
             <div style="margin-top: 15px;">
