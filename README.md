@@ -40,13 +40,6 @@
             display: inline-block;
         }
 
-        .logo-image {
-            max-width: 400px;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-        }
-
         .logo-fallback {
             font-size: 3rem;
             font-weight: bold;
@@ -257,7 +250,7 @@
             font-size: 0.9rem;
         }
 
-        /* Image Gallery */
+        /* Interactive Gallery */
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -278,16 +271,68 @@
             font-weight: bold;
             transition: transform 0.3s ease;
             position: relative;
+            cursor: pointer;
+            flex-direction: column;
+            text-align: center;
+            padding: 20px;
         }
 
         .gallery-item:hover {
             transform: scale(1.05);
+            background: #667eea;
+            color: white;
         }
 
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .gallery-item.active {
+            background: #764ba2;
+            color: white;
+            transform: scale(1.02);
+        }
+
+        .gallery-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .description-panel {
+            background: #f8f9fa;
+            padding: 0;
+            border-radius: 15px;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .description-panel.active {
+            padding: 30px;
+            max-height: 500px;
+        }
+
+        .description-content h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .description-content p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .struggle-list {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #FFD700;
+        }
+
+        .struggle-list li {
+            margin-bottom: 10px;
+            padding-left: 10px;
         }
 
         .follower-count {
@@ -443,6 +488,38 @@
                 </div>
             </section>
 
+            <!-- Interactive Gallery Section -->
+            <section class="gallery-section">
+                <h2>My Journey & Vision</h2>
+                <p>Click on each section to learn more about my journey:</p>
+                
+                <div class="gallery">
+                    <div class="gallery-item" onclick="showDescription('coding')">
+                        <div class="gallery-icon">💻</div>
+                        <div>Coding Projects</div>
+                    </div>
+                    <div class="gallery-item" onclick="showDescription('university')">
+                        <div class="gallery-icon">🎓</div>
+                        <div>University Life</div>
+                    </div>
+                    <div class="gallery-item" onclick="showDescription('future')">
+                        <div class="gallery-icon">🚀</div>
+                        <div>Future Goals</div>
+                    </div>
+                    <div class="gallery-item" onclick="showDescription('ethiopia')">
+                        <div class="gallery-icon">🇪🇹</div>
+                        <div>Ethiopian Tech</div>
+                    </div>
+                </div>
+
+                <!-- Description Panel -->
+                <div class="description-panel" id="descriptionPanel">
+                    <div class="description-content" id="descriptionContent">
+                        <!-- Content will be inserted here by JavaScript -->
+                    </div>
+                </div>
+            </section>
+
             <!-- Social Media Section -->
             <section class="social-media">
                 <h2>Follow My Programming Journey</h2>
@@ -479,40 +556,6 @@
                         <p>Connect for career opportunities</p>
                         <p class="follower-count">Let's network</p>
                         <a href="https://linkedin.com/in/yourprofile" target="_blank">Connect on LinkedIn</a>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Image Gallery Section -->
-            <section class="gallery-section">
-                <h2>My Projects & Content</h2>
-                <p>Here are some highlights from my programming journey:</p>
-                
-                <div class="gallery">
-                    <div class="gallery-item">
-                        <!-- Replace with your actual image -->
-                        <div style="text-align: center; padding: 20px;">
-                            <div style="font-size: 3rem;">💻</div>
-                            <div>Coding Projects</div>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <div style="text-align: center; padding: 20px;">
-                            <div style="font-size: 3rem;">🎓</div>
-                            <div>University Life</div>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <div style="text-align: center; padding: 20px;">
-                            <div style="font-size: 3rem;">🚀</div>
-                            <div>Future Goals</div>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <div style="text-align: center; padding: 20px;">
-                            <div style="font-size: 3rem;">🇪🇹</div>
-                            <div>Ethiopian Tech</div>
-                        </div>
                     </div>
                 </div>
             </section>
@@ -564,6 +607,98 @@
     </div>
 
     <script>
+        // Description content
+        const descriptions = {
+            coding: {
+                title: "My Coding Projects",
+                content: `
+                    <p>I'm currently working on several programming projects to build my skills:</p>
+                    <div class="struggle-list">
+                        <h4>Current Projects:</h4>
+                        <ul>
+                            <li><strong>Personal Website:</strong> This very website you're browsing! Built with HTML, CSS, and JavaScript</li>
+                            <li><strong>Python Automation:</strong> Creating scripts to automate daily tasks and improve productivity</li>
+                            <li><strong>Mobile Apps:</strong> Learning React Native to build cross-platform mobile applications</li>
+                            <li><strong>Ethiopian Tech Solutions:</strong> Working on ideas that solve local problems in Ethiopia</li>
+                        </ul>
+                    </div>
+                    <p>Every day I'm learning new technologies and pushing myself to become a better programmer. The journey is challenging but incredibly rewarding!</p>
+                `
+            },
+            university: {
+                title: "University Life & Struggles",
+                content: `
+                    <p>Being a first-year Computer Science student at Wollo University comes with its own set of challenges and learning experiences:</p>
+                    <div class="struggle-list">
+                        <h4>My Daily Struggles:</h4>
+                        <ul>
+                            <li><strong>Limited Resources:</strong> Learning advanced programming with basic equipment</li>
+                            <li><strong>Internet Challenges:</strong> Dealing with connectivity issues while trying to access online resources</li>
+                            <li><strong>Balancing Studies:</strong> Juggling between theoretical courses and practical coding practice</li>
+                            <li><strong>Self-Learning:</strong> Going beyond classroom materials to learn modern technologies</li>
+                            <li><strong>Time Management:</strong> Balancing university assignments with personal projects</li>
+                        </ul>
+                    </div>
+                    <p>Despite these challenges, I'm determined to succeed. Every obstacle makes me stronger and more creative in finding solutions!</p>
+                `
+            },
+            future: {
+                title: "My Future Goals & Vision",
+                content: `
+                    <p>I have big dreams for my future in technology and programming:</p>
+                    <div class="struggle-list">
+                        <h4>My 5-Year Vision:</h4>
+                        <ul>
+                            <li><strong>Become Full-Stack Developer:</strong> Master both frontend and backend technologies</li>
+                            <li><strong>Build Ethiopian Tech Startup:</strong> Create solutions that address local challenges in Ethiopia</li>
+                            <li><strong>Grow My Online Presence:</strong> Reach 100,000+ followers across my social media platforms</li>
+                            <li><strong>Mentor Other Students:</strong> Help other Ethiopian students learn programming</li>
+                            <li><strong>International Opportunities:</strong> Work with global tech companies while representing Ethiopia</li>
+                        </ul>
+                    </div>
+                    <p>I believe that with consistent effort and learning, I can achieve these goals and make a positive impact in the tech community!</p>
+                `
+            },
+            ethiopia: {
+                title: "Ethiopian Technology Vision",
+                content: `
+                    <p>I'm passionate about contributing to Ethiopia's growing tech ecosystem:</p>
+                    <div class="struggle-list">
+                        <h4>My Focus Areas for Ethiopia:</h4>
+                        <ul>
+                            <li><strong>Local Solutions:</strong> Developing apps and software that solve Ethiopian-specific problems</li>
+                            <li><strong>Tech Education:</strong> Creating programming content in Amharic and local languages</li>
+                            <li><strong>Digital Transformation:</strong> Helping traditional businesses adopt technology</li>
+                            <li><strong>Youth Empowerment:</strong> Inspiring the next generation of Ethiopian programmers</li>
+                            <li><strong>Global Representation:</strong> Putting Ethiopian developers on the world map</li>
+                        </ul>
+                    </div>
+                    <p>I dream of a future where Ethiopia is known for innovation and technology, not just our rich history and culture. The youth have the power to make this happen!</p>
+                `
+            }
+        };
+
+        function showDescription(type) {
+            const panel = document.getElementById('descriptionPanel');
+            const content = document.getElementById('descriptionContent');
+            const items = document.querySelectorAll('.gallery-item');
+            
+            // Remove active class from all items
+            items.forEach(item => item.classList.remove('active'));
+            
+            // Add active class to clicked item
+            event.currentTarget.classList.add('active');
+            
+            // Update content
+            content.innerHTML = `
+                <h3>${descriptions[type].title}</h3>
+                ${descriptions[type].content}
+            `;
+            
+            // Show panel with animation
+            panel.classList.add('active');
+        }
+
         // Simple animation for cards
         document.addEventListener('DOMContentLoaded', function() {
             const cards = document.querySelectorAll('.social-card, .video-card, .gallery-item');
